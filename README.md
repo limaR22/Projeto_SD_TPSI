@@ -65,7 +65,7 @@ A API pode ser testada utilizando ferramentas como o Postman. Todas as rotas e d
 ## Imagem Docker
 
 A imagem Docker da aplicação foi publicada no Docker Hub e pode ser baixada diretamente com o comando:
-docker pull <seu-username>/<nome-da-imagem>
+docker pull rodrigolopes2200/projeto_sd-web
 
 ---
 

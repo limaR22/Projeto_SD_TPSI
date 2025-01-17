@@ -9,21 +9,26 @@ from django.http import JsonResponse
 class UserViewSet(viewsets.ViewSet):
 
     def list(self, request):
+        # Obtém todos os objetos User do banco de dados
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
+        #Retorna uma lista de todos os objetos User no banco de dados.
+        #:param request: Requisição HTTP
+        #:return: Resposta HTTP com a lista de objetos User
 
+# Método para criar um novo objeto User no banco de dados
     def create(self, request):
-        serializer = UserSerializer(data=request.data)
+        serializer = UserSerializer(data=request.data) # Serializa os objetos User para JSON
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.data, status=status.HTTP_201_CREATED) # Retorna a lista de objetos User com status 200 OK
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, pk=None):
         try:
-            user = User.objects.get(pk=pk)
-            serializer = UserSerializer(user)
+            user = User.objects.get(pk=pk)# Obtém o objeto User do banco de dados pelo seu ID
+            serializer = UserSerializer(user) # Serializa o objeto User para JSON
             return Response(serializer.data)
         except User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
